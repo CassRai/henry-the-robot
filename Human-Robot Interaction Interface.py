@@ -1,6 +1,7 @@
 #HRI
 
 import tkinter as tk
+from shared_data import user_prompt
 
 class HRI:
 
@@ -30,7 +31,9 @@ class HRI:
         self.root.mainloop()
 
     def store_input(self):
+        global user_prompt
         user_input = self.textbox.get(1.0,"end-1c")
+        user_prompt = user_input
         print(user_input)
 
 
