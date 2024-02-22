@@ -1,18 +1,24 @@
 import json
 from openai import OpenAI
-from shared_data import user_prompt
+from shared_data import queue
 
 client = OpenAI()
 
 #"role": "system" = context information, gives information to model about the role they are playing.
 #"role": "user" = us, the acc user who is sending a request to chatGPT
 
+try:
+    with open("user_input.txt", "r") as file:
+        user_prompt = file.read().strip()
+except FileNotFoundError:
+    user_prompt = ""
+
 response = client.chat.completions.create(
   model="gpt-3.5-turbo-0125",
   response_format={ "type": "json_object" },
   temperature=0.3,
   messages=[
-    {"role": "system", "content": "You are an assistant designed to create JSON output from a user's command to a 4 wheeled mobile robot called Henry"},
+    {"role": "system", "content": "You are an assistant designed to create JSON output from a user's command to a 4 wheeled mobile robot called Henry he has a camera so he can see where he is going"},
     {"role": "system", "content": "The JSON output you produce needs to be contextualised to Robot Operating System commands"},
     {"role": "system", "content": """
      

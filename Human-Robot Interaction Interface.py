@@ -1,7 +1,7 @@
 #HRI
 
 import tkinter as tk
-from shared_data import user_prompt
+import os
 
 class HRI:
 
@@ -28,13 +28,25 @@ class HRI:
         self.perform_btn = tk.Button(self.frame, text="Perform Task",font=('Arial', 15), bg="#4b25bd", command=self.store_input)
         self.perform_btn.place(relx=0.5, rely=0.9, anchor="center")
 
+        self.root.protocol("WM_DELETE_WINDOW", self.closing)
+
         self.root.mainloop()
 
     def store_input(self):
         global user_prompt
         user_input = self.textbox.get(1.0,"end-1c")
-        user_prompt = user_input
+        with open("user_input.txt", "w") as file:
+            file.write(user_input)
         print(user_input)
+
+    def closing(self):
+        try:
+            #destroy file on closing
+            os.remove("user_input.txt")
+        except FileNotFoundError:
+            pass
+        self.root.destroy()
+
 
 
 
