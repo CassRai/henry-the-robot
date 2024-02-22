@@ -1,6 +1,5 @@
 import json
 from openai import OpenAI
-from shared_data import queue
 
 client = OpenAI()
 
