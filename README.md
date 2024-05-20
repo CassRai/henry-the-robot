@@ -4,8 +4,8 @@
 
 This project will allow a user to interact with a robot using an interface designed by myself in a manner that is more user-friendly than conventional human-robot interaction.
 
-## All Software Artefacts are stored in the directory:
-src
+## All Software Artefacts are stored in the src directory
+
 
 ## Installation and Set-up Process
 My project uses Ubuntu 22.04.4
