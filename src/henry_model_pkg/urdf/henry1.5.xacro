@@ -16,22 +16,18 @@
 <xacro:property name="body_density" value="2710.0"/>
 <xacro:property name="wheel_density" value="2710.0"/>
 
-
-<!--Setting Pi constant -->
-<xacro:property name="pi_const" value="3.14159265"/>
-
 <!--Setting mass of Henry's body and wheels using formula-->
 <xacro:property name="body_mass" 
 value="${body_density*body_link_x*body_link_y*body_link_z}"/>
 
 <xacro:property name="wheel_mass" 
-value="${wheel_density*pi_const*wheel_link_radius*wheel_link_radius*wheel_link_length}"/>
+value="${wheel_density*3.14159265*wheel_link_radius*wheel_link_radius*wheel_link_length}"/>
 
 <!-- Moments of inertia of a wheel -->
 <!-- Moment of intertia for z axis -->
 <xacro:property name="I_z_wheel" value="${0.5*wheel_mass*wheel_link_radius*wheel_link_radius}"/>
 <!-- Moment of intertia for x and y axis because it is the same for both for a solid cylinder-->
-<xacro:property name="I_wheel"
+<xacro:property name="I_x_y_wheel"
 value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_link_length*wheel_link_length)}"/>
 
 <!-- anchor point -->
@@ -115,7 +111,7 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${wheel_mass}"/>
-        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+        <inertia ixx="${I_x_y_wheel}" ixy="0" ixz="0" iyy="${I_x_y_wheel}" iyz="0" izz="${I_z_wheel}"/>   
     </inertial>
 </link>
 
@@ -154,7 +150,7 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${wheel_mass}"/>
-        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+        <inertia ixx="${I_x_y_wheel}" ixy="0" ixz="0" iyy="${I_x_y_wheel}" iyz="0" izz="${I_z_wheel}"/>   
     </inertial>
 </link>
 
@@ -193,7 +189,7 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${wheel_mass}"/>
-        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+        <inertia ixx="${I_x_y_wheel}" ixy="0" ixz="0" iyy="${I_x_y_wheel}" iyz="0" izz="${I_z_wheel}"/>   
     </inertial>
 </link>
 
@@ -231,7 +227,7 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
     <inertial>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <mass value="${wheel_mass}"/>
-        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+        <inertia ixx="${I_x_y_wheel}" ixy="0" ixz="0" iyy="${I_x_y_wheel}" iyz="0" izz="${I_z_wheel}"/>   
     </inertial>
 </link>
 
