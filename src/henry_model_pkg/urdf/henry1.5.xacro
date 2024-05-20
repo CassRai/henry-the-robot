@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+
+<robot name="Henry-1.5" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<!--Setting X,Y,Z dimensions of Henry's body to be used later measured in metres -->
+<xacro:property name="body_link_x" value="1"/>
+<xacro:property name="body_link_y" value="0.6"/>
+<xacro:property name="body_link_z" value="0.3"/>
+
+<!--Setting dimensions of Henry's wheels to be used later measured in metres -->
+<xacro:property name="wheel_link_radius" value="0.15"/>
+<xacro:property name="wheel_link_length" value="0.1"/>
+<xacro:property name="wheel_link_z" value="-0.1"/>
+
+<!--Setting material density in kilograms per cubed metre -->
+<xacro:property name="body_density" value="2710.0"/>
+<xacro:property name="wheel_density" value="2710.0"/>
+
+
+<!--Setting Pi constant -->
+<xacro:property name="pi_const" value="3.14159265"/>
+
+<!--Setting mass of Henry's body and wheels using formula-->
+<xacro:property name="body_mass" 
+value="${body_density*body_link_x*body_link_y*body_link_z}"/>
+
+<xacro:property name="wheel_mass" 
+value="${wheel_density*pi_const*wheel_link_radius*wheel_link_radius*wheel_link_length}"/>
+
+<!-- Moments of inertia of a wheel -->
+<!-- Moment of intertia for z axis -->
+<xacro:property name="I_z_wheel" value="${0.5*wheel_mass*wheel_link_radius*wheel_link_radius}"/>
+<!-- Moment of intertia for x and y axis because it is the same for both for a solid cylinder-->
+<xacro:property name="I_wheel"
+value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_link_length*wheel_link_length)}"/>
+
+
+<!-- Macro - basically a re-usable code block -->
+<!-- This macro defines inertial section of a wheel-->
+<xacro:macro name="wheel_inertia">
+    <inertial>
+    <origin rpy="0 0 0" xyz="0 0 0"/>
+    <mass value="${wheel_mass}"/>
+    <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+    </inertial>
+</xacro:macro>
+
+<!-- anchor point -->
+<link name="dummy_root_link">   
+</link>
+
+<joint name="dummy_root_joint" type="fixed">
+    <parent link="dummy_root_link"/>
+    <child link="body_link"/>
+</joint> 
+
+
+<link name="body_link">
+    <visual>
+     <!--visual defines how robot will be displayed in simulation (Gazebo) -->
+        <geometry>
+            <box size="${body_link_x} ${body_link_y} ${body_link_z}"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="blue">
+            <color rgba="0 0 1 1"/>  
+        </material>
+    </visual>
+
+    <!--how collisions are shown in simulation - if you have a complex shape and need to simplfiy for computational power -->
+    <!-- we just have a box for both-->
+    <collision>
+        <geometry>
+            <box size="${body_link_x} ${body_link_y} ${body_link_z}"/>
+        </geometry>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </collision>
+
+    <!--tells simulation (Gazebo) how hard it is to spin or rotate the body of the robot -->
+    <inertial>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <mass value="${body_mass}"/>
+         <!--tag tells simulation (Gazebo) how body should move and how to resist changes in movement -->
+        <inertia
+         ixx="${(1/12)*body_mass*(body_link_y*body_link_y+body_link_z*body_link_z)}" 
+         ixy="0.0" 
+         ixz="0.0" 
+         iyy="${(1/12)*body_mass*(body_link_x*body_link_x+body_link_z*body_link_z)}"
+         iyz="0.0" 
+         izz="${(1/12)*body_mass*(body_link_y*body_link_y+body_link_x*body_link_x)}"/>
+    </inertial>
+</link>
+
+
+<!-- continuous joint type means a rotational motion without a limit - perfect for a wheel-->
+<joint name="wheel1_joint" type="continuous">
+    <origin xyz="${-body_link_x/2+1.2*wheel_link_radius} ${-body_link_y/2-wheel_link_length/2} ${wheel_link_z}" rpy="0 0 0"/>
+    <parent link="body_link"/>
+    <child link="wheel1_link"/>
+<!-- joint will rotate around y axis-->
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+</joint>
+
+<link name="wheel1_link">
+    <visual>
+    <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <material name="yellow">
+            <color rgba="1 1 0 1"/>  
+        </material>
+    </visual>
+    
+    <collision>
+       <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+    </collision>
+
+    <xacro:wheel_inertia />
+</link>
+
+ 
+<joint name="wheel2_joint" type="continuous">
+    <origin xyz="${-body_link_x/2+1.2*wheel_link_radius} ${body_link_y/2+wheel_link_length/2} ${wheel_link_z}" rpy="0 0 0"/>
+    <parent link="body_link"/>
+    <child link="wheel2_link"/>
+<!-- joint will rotate around y axis-->
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+</joint>
+
+
+<link name="wheel2_link">
+    <visual>
+    <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <material name="yellow">
+            <color rgba="1 1 0 1"/>  
+        </material>
+    </visual>
+    
+    <collision>
+       <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+    </collision>
+
+    <xacro:wheel_inertia/>
+</link>
+
+
+<!-- This is for front left wheel of Henry-->
+<joint name="wheel3_joint" type="continuous">
+    <origin xyz="${body_link_x/2-1.2*wheel_link_radius} ${-body_link_y/2-wheel_link_length/2} ${wheel_link_z}" rpy="0 0 0"/>
+    <parent link="body_link"/>
+    <child link="wheel3_link"/>
+<!-- joint will rotate around y axis-->
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+</joint>
+
+<link name="wheel3_link">
+    <visual>
+    <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <material name="yellow">
+            <color rgba="1 1 0 1"/>  
+        </material>
+    </visual>
+    
+    <collision>
+       <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+    </collision>
+
+    <xacro:wheel_inertia/>
+</link>
+
+
+<joint name="wheel4_joint" type="continuous">
+    <origin xyz="${body_link_x/2-1.2*wheel_link_radius} ${body_link_y/2+wheel_link_length/2} ${wheel_link_z}" rpy="0 0 0"/>
+    <parent link="body_link"/>
+    <child link="wheel4_link"/>
+<!-- joint will rotate around y axis-->
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="1000"/>
+    <dynamics damping="1.0" friction="1.0"/>
+</joint>
+
+<link name="wheel4_link">
+    <visual>
+    <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+        <material name="yellow">
+            <color rgba="1 1 0 1"/>  
+        </material>
+    </visual>
+    
+    <collision>
+       <!-- want link to rotate 1.570795 radians around x axis-->
+        <origin xyz="0 0 0" rpy="1.570795 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_link_radius}" length="${wheel_link_length}"/>
+        </geometry>
+    </collision>
+
+    <xacro:wheel_inertia/>
+</link>
+
+<!--#################################################################################-->
+<xacro:include filename="henry.gazebo"/>
+
+
+</robot>
