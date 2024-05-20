@@ -34,17 +34,6 @@ value="${wheel_density*pi_const*wheel_link_radius*wheel_link_radius*wheel_link_l
 <xacro:property name="I_wheel"
 value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_link_length*wheel_link_length)}"/>
 
-
-<!-- Macro - basically a re-usable code block -->
-<!-- This macro defines inertial section of a wheel-->
-<xacro:macro name="wheel_inertia">
-    <inertial>
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <mass value="${wheel_mass}"/>
-    <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
-    </inertial>
-</xacro:macro>
-
 <!-- anchor point -->
 <link name="dummy_root_link">   
 </link>
@@ -123,7 +112,11 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
         </geometry>
     </collision>
 
-    <xacro:wheel_inertia />
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+    </inertial>
 </link>
 
  
@@ -158,7 +151,11 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
         </geometry>
     </collision>
 
-    <xacro:wheel_inertia/>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+    </inertial>
 </link>
 
 
@@ -193,7 +190,11 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
         </geometry>
     </collision>
 
-    <xacro:wheel_inertia/>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+    </inertial>
 </link>
 
 
@@ -227,7 +228,11 @@ value="${(1.0/12.0)*wheel_mass*(3.0*wheel_link_radius*wheel_link_radius+wheel_li
         </geometry>
     </collision>
 
-    <xacro:wheel_inertia/>
+    <inertial>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <mass value="${wheel_mass}"/>
+        <inertia ixx="${I_wheel}" ixy="0" ixz="0" iyy="${I_wheel}" iyz="0" izz="${I_z_wheel}"/>   
+    </inertial>
 </link>
 
 <!--#################################################################################-->
