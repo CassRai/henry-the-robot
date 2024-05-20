@@ -54,7 +54,7 @@ class HRI:
         user_prompt = self.textbox.get(1.0,"end-1c")
         self.textbox.delete("1.0", "end") 
         #using a thread to allow api to handle input without having to close GUI.
-        # target - when thread starts will call process_input function - allow api to process prompt.
+        # target - when thread starts will call api_process_input function - allow api to process prompt.
         threading.Thread(target=self.api_process_input, args=(user_prompt,)).start()
         print(user_prompt)
 
@@ -62,7 +62,7 @@ class HRI:
         #wrapping around  a try-except block to provide error checking for api issues
         try:
             #"role": "system" = context information, gives information to model about the role they are playing.
-            #"role": "user" = us, the acc user who is sending a request to chatGPT
+            #"role": "user" = the actual user who is sending a request to chatGPT
             response = self.client.chat.completions.create(
                 model="gpt-3.5-turbo-0125",
                 response_format={"type": "json_object"},

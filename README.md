@@ -4,7 +4,8 @@
 
 This project will allow a user to interact with a robot using an interface designed by myself in a manner that is more user-friendly than conventional human-robot interaction.
 
-## All Software Artefacts are stored in my ROS2 Workspace: henry_home
+## All Software Artefacts are stored in the directory:
+src
 
 ## Installation and Set-up Process
 My project uses Ubuntu 22.04.4
@@ -32,11 +33,14 @@ export OPENAI_API_KEY='your-project-key'
 
 You can also write this line in the bottom of your ./bashrc file to keep it persistent.
 
-4. Download the henry_home folder into your home directory
+4. Create a ROS2 Workspace:
+https://www.youtube.com/watch?v=3GbrKQ7G2P0
+
+5. Put my src folder into your ROS2 workspace
 
 ## Running the Software Artefacts:
 
-1. run "colcon build" in the terminal to re-build the packages
+1. run "colcon build" in the terminal to build everything.
 2. run "source ~/. bashrc" in the terminal - to source the ./bashrc file
 3. run "ros2 run henry_model_pkg start_hri" in the terminal to start the TKinter HRI Interface
 4. In another terminal repeat lines 1 and 2 before running "ros2 launch henry_model_pkg henry_sim.launch.py" to start the simulation and the ros_ign_bridge.
