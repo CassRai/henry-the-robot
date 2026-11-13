@@ -1,10 +1,21 @@
 # Large-Language Model Controlled Robot
 
-## Nicknamed "Little Henry The Robot"
+Nicknamed "Little Henry The Robot"
  
 ## Information about this repository
 
 This project will allow a user to interact with a robot using an interface designed by myself in a manner that is more user-friendly than conventional human-robot interaction.
+
+## Images of The Project
+
+Picture of Little Henry The Robot - 4 wheel mobile robot shown in Gazebo, made using a URDF model.
+
+![Picture of Henry](<img width="581" height="797" alt="image" src="https://github.com/user-attachments/assets/d0b924f4-c0cd-4342-9cc0-f5a40836d0df" />)
+
+Below is a screenshot showing the HRI Interface and a possible command for Henry to carry out.
+
+![Screenshot of HRI Interface with command](<img width="1813" height="1036" alt="image" src="https://github.com/user-attachments/assets/c4987260-bf75-4db0-8a90-9cd6da0b8872" /> )
+
 
 ## All Software Artefacts are stored in the src directory
 
