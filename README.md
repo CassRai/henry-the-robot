@@ -1,6 +1,8 @@
+# Large Language Model Robot Project
+
 <div align="center">
 
-[![Large-Language Model Controlled Robot](https://img.shields.io/badge/Large--Language%20Model%20Controlled%20Robot-1d4ed8?style=for-the-badge&logoColor=white)](https://github.com/CassRai/henry-the-robot)
+[![LLM Controlled 4 Wheel Mobile Robot built using ROS, Gazebo, OpenAI API and URDF models](https://img.shields.io/badge/Large--Language%20Model%20Controlled%20Robot-1d4ed8?style=for-the-badge&logoColor=white)](https://github.com/CassRai/henry-the-robot)
 
 [![Nicknamed Little Henry The Robot](https://img.shields.io/badge/Nicknamed%3A%20%22Little%20Henry%20The%20Robot%22-ca8a04?style=for-the-badge&logoColor=white)](https://github.com/CassRai/henry-the-robot)
 
