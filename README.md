@@ -1,4 +1,4 @@
-# Large-Language Model Controlled Robot
+# Large-Language Model Controlled Robot, nicknamed "Little Henry The Robot"
 
 ## Information about this repository
 
