@@ -2,9 +2,17 @@
 
 <div align="center">
 
-[![LLM Controlled 4 Wheel Mobile Robot built using ROS, Gazebo, OpenAI API and URDF models](https://img.shields.io/badge/Large--Language%20Model%20Controlled%20Robot-1d4ed8?style=for-the-badge&logoColor=white)](https://github.com/CassRai/henry-the-robot)
+<div align="center">
+
+<a href="https://github.com/CassRai/henry-the-robot">
+  <img src="https://img.shields.io/badge/LLM%20Controlled%204%20Wheel%20Mobile%20Robot%20built%20using%20the%20ROS%2C%20Gazebo%2C%20OpenAI%20Api%20and%20URDF%20frameworks-1d4ed8?style=for-the-badge&logoColor=white" height="45" alt="LLM Controlled 4 Wheel Mobile Robot built using the ROS, Gazebo, OpenAI Api and URDF frameworks">
+</a>
+
+<br><br>
 
 [![Nicknamed Little Henry The Robot](https://img.shields.io/badge/Nicknamed%3A%20%22Little%20Henry%20The%20Robot%22-ca8a04?style=for-the-badge&logoColor=white)](https://github.com/CassRai/henry-the-robot)
+
+</div>
 
 </div>
 
